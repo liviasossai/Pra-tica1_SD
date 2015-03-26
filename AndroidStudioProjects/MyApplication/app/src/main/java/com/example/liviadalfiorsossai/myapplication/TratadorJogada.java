@@ -5,10 +5,12 @@ import android.widget.ImageView;
 /**
  * Created by liviadalfiorsossai on 3/22/15.
  */
+
+// Classe que armazena os estados de uma jogada, para que seja possível renderizar a peça certa na posição correta
 public class TratadorJogada {
 
-    private ImageView iv_j1;
-    private ImageView iv_j2;
+    private ImageView iv_j1; // Armazena a peça do primeiro estado da jogada
+    private ImageView iv_j2; // Armazena a peça do segundo estado da jogada
 
     public TratadorJogada(){
     }

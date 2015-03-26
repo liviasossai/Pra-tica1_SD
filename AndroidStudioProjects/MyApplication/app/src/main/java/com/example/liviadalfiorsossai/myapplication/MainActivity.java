@@ -35,7 +35,7 @@ public int NUM_PARES = 6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
+        // Será usado futuramente, para fazer animações
        // ImageView anim = (ImageView) findViewById(R.id.animacao);
        // anim.setBackgroundResource(R.drawable.animacao);
 
@@ -48,7 +48,6 @@ public int NUM_PARES = 6;
 
         final TextView textview = (TextView) findViewById(R.id.textView);
 
-
         final TratadorPecas pec = new TratadorPecas(0);
 
         final TratadorJogada TJ = new TratadorJogada();
@@ -57,10 +56,14 @@ public int NUM_PARES = 6;
 
         final ImageAdapter ImgAdptr = new ImageAdapter(this);
 
-        final Button button2 = (Button) findViewById(R.id.button2);
+        final Button button2 = (Button) findViewById(R.id.button2); // Botão que ativa a exibição dos níveis do jogo
+
+
+
+
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(MainActivity.this, button2);
+                PopupMenu popup = new PopupMenu(MainActivity.this, button2); // Popup que exibe os níveis do jogo e é acionado por botão 2
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
 
                 // Cadastrar callback dos itens da lista da popup
@@ -69,79 +72,35 @@ public int NUM_PARES = 6;
                         if(item.getTitle().equals("Small Board (3x4)")){
                             NUM_PARES = 6;
 
-                            pec.re_inicializa(NUM_PARES);
-
-                            jogada = 0;
-                            peca_virada1_pos=-1;
-                            peca_virada2_pos=-1;
-                            pares_virados = 0;
-
-                            textview.setTextColor(Color.rgb(0, 0, 0));
-                            textview.setTextSize(16);
-                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
-                            textview.setText("  Total Pairs Flipped: 0");
-                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
-
-                            ImgAdptr.init(NUM_PARES);
-                            gridview.setAdapter(ImgAdptr);
                         }
                         else if(item.getTitle().equals("Medium Board (5x4)")){
                             NUM_PARES = 10;
 
-                            pec.re_inicializa(NUM_PARES);
 
-                            jogada = 0;
-                            peca_virada1_pos=-1;
-                            peca_virada2_pos=-1;
-                            pares_virados = 0;
-
-                            textview.setTextColor(Color.rgb(0, 0, 0));
-                            textview.setTextSize(16);
-                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
-                            textview.setText("  Total Pairs Flipped: 0");
-                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
-
-                            ImgAdptr.init(NUM_PARES);
-                            gridview.setAdapter(ImgAdptr);
                         }
                         else if(item.getTitle().equals("Big Board (7x4)")){
                             NUM_PARES = 14;
 
-                            pec.re_inicializa(NUM_PARES);
-
-                            jogada = 0;
-                            peca_virada1_pos=-1;
-                            peca_virada2_pos=-1;
-                            pares_virados = 0;
-
-                            textview.setTextColor(Color.rgb(0, 0, 0));
-                            textview.setTextSize(16);
-                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
-                            textview.setText("  Total Pairs Flipped: 0");
-                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
-
-                            ImgAdptr.init(NUM_PARES);
-                            gridview.setAdapter(ImgAdptr);
-                        }
+                         }
                         else if(item.getTitle().equals("Teste (2x4)")){
                             NUM_PARES = 4;
 
-                            pec.re_inicializa(NUM_PARES);
+                       }
+                        pec.re_inicializa(NUM_PARES);
 
-                            jogada = 0;
-                            peca_virada1_pos=-1;
-                            peca_virada2_pos=-1;
-                            pares_virados = 0;
+                        jogada = 0;
+                        peca_virada1_pos=-1;
+                        peca_virada2_pos=-1;
+                        pares_virados = 0;
 
-                            textview.setTextColor(Color.rgb(0, 0, 0));
-                            textview.setTextSize(16);
-                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
-                            textview.setText("  Total Pairs Flipped: 0");
-                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+                        textview.setTextColor(Color.rgb(0, 0, 0));
+                        textview.setTextSize(16);
+                        textview.setBackgroundColor(Color.rgb(255, 255, 255));
+                        textview.setText("  Total Pairs Flipped: 0");
+                        textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
 
-                            ImgAdptr.init(NUM_PARES);
-                            gridview.setAdapter(ImgAdptr);
-                        }
+                        ImgAdptr.init(NUM_PARES);
+                        gridview.setAdapter(ImgAdptr);
 
                         return true;
                     }
@@ -152,7 +111,7 @@ public int NUM_PARES = 6;
         });
 
 
-        final Button button = (Button) findViewById(R.id.button);
+        final Button button = (Button) findViewById(R.id.button); // Iniciar novo jogo
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -175,17 +134,19 @@ public int NUM_PARES = 6;
             }
         });
 
-
+        // Sempre que o jogador clicar em uma peça, serão computados os estados do jogo
+        // (se as peças formarem par elas devem sair do jogo, caso contrário, suas imagens devem ser cobertas novamente)
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 ImageView imageView = (ImageView) v;
 
                 if (pec.getPecaV(position)) {
+                    // Estado 1 da jogada
                     if (jogada == 0) {
 
                         if(pares_virados > 0) {
                             textview.setText("  Total Pairs Flipped: "+pares_virados);
-                            if ((peca_virada2 == peca_virada1) && peca_virada1_pos != peca_virada2_pos) {
+                            if ((peca_virada2 == peca_virada1) && peca_virada1_pos != peca_virada2_pos) { // Não permitir que o clique em uma mesma posição conte como par
                                 TJ.getIV_j1().setImageResource(pec.getNull());
                                 TJ.getIV_j2().setImageResource(pec.getNull());
 
@@ -205,26 +166,28 @@ public int NUM_PARES = 6;
 
                             }
                         }
-                        //if(peca_virada2_pos != position) {
+
                             imageView.setImageResource(pec.getPeca(position));
                             peca_virada1 = pec.getPeca(position);
                             peca_virada1_pos = position;
                            TJ.setIV_j1(imageView);
                             jogada = 1;
-                       // }
-                    } else if (jogada == 1) {
+
+                    }
+                    // Estado 2 da jogada
+                    else if (jogada == 1) {
                         if (pec.getPecaV(position)) {
-                            if (position != peca_virada1_pos) {
+                            if (position != peca_virada1_pos) { // Para não permitir que cliques simultâneos em uma mesma posição contem como cartas viradas
                                 pares_virados++;
                                 peca_virada2 = pec.getPeca(position);
                                 peca_virada2_pos = position;
                                 TJ.setIV_j2(imageView);
                                 imageView.setImageResource(pec.getPeca(position));
-                                jogada = 0;
+                                jogada = 0; // O jogo só retorna ao estado 1 (verificação) se a posição selecionada for diferente da atual
 
 
 
-                                if(pec.getPecasDisp() <= 2){
+                                if(pec.getPecasDisp() <= 2){ // Se só restam duas peças, isso significa que todos os pares já foram encontrados
                                     pec.setPecaValida(peca_virada1_pos);
                                     pec.setPecaValida(peca_virada2_pos);
 
@@ -240,11 +203,7 @@ public int NUM_PARES = 6;
                         }
 
 
-                    } /*else if (jogada == 2) {
-                        jogada = 0;
-                        pares_virados++;
-
-                    }*/
+                    } 
 
 
                 }

@@ -10,7 +10,7 @@ public class TratadorPecas {
 
     private int NUM_PARES;
     private int [] pos;
-    public boolean [] peca_valida;
+    public boolean [] peca_valida; // Usado para impedir que seja computada a jogada de peças que não existem mais no jogo
 
     public TratadorPecas(int NUM_PAR){
         NUM_PARES = NUM_PAR;
@@ -57,6 +57,7 @@ public class TratadorPecas {
 
     };
 
+    // Embaralha as peças
     private int [] imagensRandomicas(){
 
         ArrayList<Integer> imagensPossiveis = new ArrayList<Integer>();
@@ -101,11 +102,11 @@ public class TratadorPecas {
 
     public int getNull(){
         return R.drawable.f30;
-    }
+    } // Retorna o código da imagem uma carta que não é mais válida
 
     public int getCover(){
         return R.drawable.f0;
-    }
+    } // Retorna o códido da imagem da carta virada
 
     public int getPosicao(int img){
         int ind = 0;
@@ -115,16 +116,19 @@ public class TratadorPecas {
         return ind;
     }
 
+    // Modifica a imagem exibida em uma posição
     public void setPos(int posicao, int img){
         pos[posicao] = img;
 
     }
 
+    // Usado quando uma peça sai do jogo (ou seja, quando um par já foi encontrado)
     public void setPecaValida(int posicao){
         peca_valida[posicao] = false;
 
     }
 
+    // Verifica se uma peça no jogo é válida (ou seja, se seu par ainda não foi encontrado)
     public boolean getPecaV(int position){
      return peca_valida[position];
     }
