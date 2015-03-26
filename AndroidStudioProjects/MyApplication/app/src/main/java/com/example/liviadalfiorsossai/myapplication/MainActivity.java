@@ -66,10 +66,82 @@ public int NUM_PARES = 6;
                 // Cadastrar callback dos itens da lista da popup
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals("Small Board (3x4)")){NUM_PARES = 6;}
-                        else if(item.getTitle().equals("Medium Board (5x4)")){NUM_PARES = 10;}
-                        else if(item.getTitle().equals("Big Board (7x4)")){NUM_PARES = 14;}
-                        else if(item.getTitle().equals("Teste (2x4)")){NUM_PARES = 4;}
+                        if(item.getTitle().equals("Small Board (3x4)")){
+                            NUM_PARES = 6;
+
+                            pec.re_inicializa(NUM_PARES);
+
+                            jogada = 0;
+                            peca_virada1_pos=-1;
+                            peca_virada2_pos=-1;
+                            pares_virados = 0;
+
+                            textview.setTextColor(Color.rgb(0, 0, 0));
+                            textview.setTextSize(16);
+                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
+                            textview.setText("  Total Pairs Flipped: 0");
+                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+
+                            ImgAdptr.init(NUM_PARES);
+                            gridview.setAdapter(ImgAdptr);
+                        }
+                        else if(item.getTitle().equals("Medium Board (5x4)")){
+                            NUM_PARES = 10;
+
+                            pec.re_inicializa(NUM_PARES);
+
+                            jogada = 0;
+                            peca_virada1_pos=-1;
+                            peca_virada2_pos=-1;
+                            pares_virados = 0;
+
+                            textview.setTextColor(Color.rgb(0, 0, 0));
+                            textview.setTextSize(16);
+                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
+                            textview.setText("  Total Pairs Flipped: 0");
+                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+
+                            ImgAdptr.init(NUM_PARES);
+                            gridview.setAdapter(ImgAdptr);
+                        }
+                        else if(item.getTitle().equals("Big Board (7x4)")){
+                            NUM_PARES = 14;
+
+                            pec.re_inicializa(NUM_PARES);
+
+                            jogada = 0;
+                            peca_virada1_pos=-1;
+                            peca_virada2_pos=-1;
+                            pares_virados = 0;
+
+                            textview.setTextColor(Color.rgb(0, 0, 0));
+                            textview.setTextSize(16);
+                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
+                            textview.setText("  Total Pairs Flipped: 0");
+                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+
+                            ImgAdptr.init(NUM_PARES);
+                            gridview.setAdapter(ImgAdptr);
+                        }
+                        else if(item.getTitle().equals("Teste (2x4)")){
+                            NUM_PARES = 4;
+
+                            pec.re_inicializa(NUM_PARES);
+
+                            jogada = 0;
+                            peca_virada1_pos=-1;
+                            peca_virada2_pos=-1;
+                            pares_virados = 0;
+
+                            textview.setTextColor(Color.rgb(0, 0, 0));
+                            textview.setTextSize(16);
+                            textview.setBackgroundColor(Color.rgb(255, 255, 255));
+                            textview.setText("  Total Pairs Flipped: 0");
+                            textview.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
+
+                            ImgAdptr.init(NUM_PARES);
+                            gridview.setAdapter(ImgAdptr);
+                        }
 
                         return true;
                     }
@@ -162,16 +234,17 @@ public int NUM_PARES = 6;
 
                                     textview.setTextColor(Color.rgb(255, 0, 255));
                                     textview.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
+
                                 }
                             }
                         }
 
 
-                    } else if (jogada == 2) {
+                    } /*else if (jogada == 2) {
                         jogada = 0;
                         pares_virados++;
 
-                    }
+                    }*/
 
 
                 }
