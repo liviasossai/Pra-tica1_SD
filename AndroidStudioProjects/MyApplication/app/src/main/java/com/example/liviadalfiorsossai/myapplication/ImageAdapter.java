@@ -41,16 +41,13 @@ public class ImageAdapter extends BaseAdapter {
 
 
 
-    private final int NUM_PARES = 12;
+    private int NUM_PARES = 12;
 
     public ImageAdapter(Context c) {
         //pos = imagensRandomicas();
         mContext = c;
 
-        cover = new int[2*NUM_PARES];
-        for(int i = 0; i < 2*NUM_PARES; i++){
-        cover[i] = R.drawable.f0;
-        }
+
     }
 
     @Override
@@ -66,6 +63,17 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
+
+
+    public void init(int NUM){
+
+        NUM_PARES = NUM;
+
+        cover = new int[2*NUM_PARES];
+        for(int i = 0; i < 2*NUM_PARES; i++){
+            cover[i] = R.drawable.f0;
+        }
+    }
 
     // create a new ImageView for each item referenced by the Adapter
     @Override

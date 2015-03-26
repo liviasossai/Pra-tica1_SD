@@ -10,7 +10,7 @@ public class TratadorPecas {
 
     private int NUM_PARES;
     private int [] pos;
-    private boolean [] peca_valida;
+    public boolean [] peca_valida;
 
     public TratadorPecas(int NUM_PAR){
         NUM_PARES = NUM_PAR;
@@ -22,6 +22,28 @@ public class TratadorPecas {
             peca_valida[i] = true;
         }
 
+    }
+
+    public void re_inicializa(int NUM_PAR){
+        NUM_PARES = NUM_PAR;
+        pos = imagensRandomicas();
+
+        peca_valida = new boolean[2*NUM_PAR];
+
+        for(int i = 0; i < 2*NUM_PAR; i++){
+            peca_valida[i] = true;
+        }
+
+    }
+
+    public int getPecasDisp(){
+        int count = 0;
+        for(int i = 0; i < 2*NUM_PARES; i++){
+            if(peca_valida[i]){
+                count++;
+            }
+        }
+        return count;
     }
 
     // Todas as imagens possíveis
